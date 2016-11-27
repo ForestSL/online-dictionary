@@ -26,7 +26,7 @@ public class multiServer extends JFrame{
 		
 		try{
 			//Create a server socket
-			ServerSocket serverSocket = new ServerSocket(8000);
+			ServerSocket serverSocket = new ServerSocket(7000);
 			jta.append("Server startes at "+new Date()+'\n');
 			
 			//Number a client
@@ -80,6 +80,7 @@ public class multiServer extends JFrame{
 				while(true){
 					//Receive data from the client
 					String rec=inputFromClient.readUTF();
+					jta.append("info received from client : "+rec+"\n");
 					//handle data
 					/*word: 
 					 * reg:0_name_pass
@@ -88,12 +89,14 @@ public class multiServer extends JFrame{
 					 * like:3_word_n1_n2_n3
 					 * etc...
 					 */
-					//send data back to the client
-					String set=rec;
-					outputToClient.writeUTF(set);
+					DB_Server se=new DB_Server();
+					String check=(se.Check_DB(rec));
+					jta.append("info received from database : "+check+"\n");
 					
-					jta.append("info received from client"+rec+"\n");
-					jta.append("info sent to client"+set+"\n\n");
+					//send data back to the client
+					String set=check;
+					outputToClient.writeUTF(set);
+					jta.append("info sent to client : "+set+"\n\n");
 				}
 			}
 			catch(IOException e){
