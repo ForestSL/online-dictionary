@@ -32,7 +32,23 @@ public class DB_Server extends DB_con{
 		else if(temp[0].equals("2"))//返回单词解释和点赞数
 		{
 			DB_Word wo=new DB_Word();
-			result=wo.word(temp[1]);
+			result=wo.word(temp[1]);//word_baidu_youdao_bing
+			//返回翻译baidu_youdao_bing_百度_有道_必应
+			Translate tr=new Translate();
+			result=tr.translate(result);
+			/*测试用
+			 * String[] mtemp=result.split(" ");
+			result=mtemp[1];
+			result+="!!!!";
+			result+=mtemp[2];
+			result+="!!!!";
+			result+=mtemp[3];
+			result+="!!!!";
+			result+=mtemp[0];
+			result+="!!!!";
+			result+=mtemp[0];
+			result+="!!!!";
+			result+=mtemp[0];*/
 		}
 		else if(temp[0].equals("3"))//存储点赞数返回提示
 		{
@@ -44,9 +60,12 @@ public class DB_Server extends DB_con{
 			
 	}
 	
+	
 	public static void main(String[] args){
 		DB_Server se=new DB_Server();
-		System.out.println(se.Check_DB("2 apple"));
+		System.out.println(se.Check_DB("3 apple -1 0 0"));
+		//Translate tr=new Translate();
+		//System.out.println(tr.translate("banana 1 2 3"));
 	}
 	
 }

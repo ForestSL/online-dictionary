@@ -19,6 +19,7 @@ public class DB_Word extends DB_con{
 			result+=likenum(word);
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
+			result="单词查询失败";
 			e.printStackTrace();
 		}
 		

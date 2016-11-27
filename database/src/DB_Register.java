@@ -32,8 +32,8 @@ public class DB_Register  extends DB_con{
 		String sql="create table if not exists userinfo(username varchar(10),userpassword varchar(20),userstate varchar(5))";
 		stmt.executeUpdate(sql);
 		//System.out.println("创建用户信息表成功");
-		result="创建用户信息表成功";
-		result+="\n";
+		//result="创建用户信息表成功";
+		//result+="\n";
 		
 		sql = "select * from userinfo";
 		ResultSet rs = stmt.executeQuery(sql);
@@ -55,10 +55,10 @@ public class DB_Register  extends DB_con{
 			sql="insert into userinfo(username,userpassword,userstate) values('"+name+"','"+password+"','"+state+"')";
 			int judge=stmt.executeUpdate(sql);
 			if(judge>0)
-				result+="注册成功";
+				result="注册成功";
 				//System.out.println("注册成功");
 			else
-				result+="注册失败";
+				result="注册失败";
 				//System.out.println("注册失败");
 		}
 		
