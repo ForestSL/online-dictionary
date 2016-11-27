@@ -17,7 +17,7 @@ public class Client{
 	public Client(){
 		try{
 			//create a socket to connect the server
-			Socket socket=new Socket("localhost",8000);
+			Socket socket=new Socket("localhost",7000);
 			
 			//create an input stream to receive data from server
 			fromServer=new DataInputStream(socket.getInputStream());
