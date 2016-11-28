@@ -16,22 +16,24 @@ import javax.swing.event.ListSelectionListener;
 public class DicPanel extends JFrame{
 	private DataInputStream fromServer;
 	private DataOutputStream toServer;
+	private String name;
 	private boolean bd,yd,by;
 	private int bdNum,ydNum,byNum;
 	private String bdExp,ydExp,byExp;
 	private String sWord;
 	private ImageIcon likeIcon=new ImageIcon("image/like.gif");
 	private ImageIcon unlikeIcon=new ImageIcon("image/unlike.gif");
-	//private JFrame handle=this;
+	private JFrame handle=this;
 
 	private InputPanel inputPanel=new InputPanel();
 	private OutPutPanel outputPanel=new OutPutPanel();
-//	private ButtonPanel buttonPanel=new ButtonPanel();
+	private ButtonPanel buttonPanel=new ButtonPanel();
 
 
-	public DicPanel(DataInputStream fs,DataOutputStream ts){
+	public DicPanel(DataInputStream fs,DataOutputStream ts,String nm){
 		fromServer=fs;
 		toServer=ts;
+		name=nm;
 		
 		//add inputPanel outputPanel tipPanel to the frame
 		setTitle("Online Dicionary");
@@ -39,10 +41,10 @@ public class DicPanel extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setLayout(new BorderLayout(3,3));
+		setLayout(new BorderLayout(0,0));
 		add(inputPanel,BorderLayout.NORTH);
 		add(outputPanel,BorderLayout.CENTER);
-//		add(buttonPanel,BorderLayout.SOUTH);
+		add(buttonPanel,BorderLayout.SOUTH);
 	}
 
 	class InputPanel extends JPanel{
@@ -52,9 +54,11 @@ public class DicPanel extends JFrame{
 			//setBackground(Color.WHITE);
 			
 			JPanel title=new JPanel();
+			JLabel JLtitle=new JLabel("My Dictionary\n");
 			title.setBackground(Color.WHITE);
+			JLtitle.setFont(new Font("Serif",Font.BOLD,16));
 			title.setLayout(new FlowLayout(FlowLayout.CENTER));
-			title.add(new JLabel("My Dictionary\n"));
+			title.add(JLtitle);
 			
 			add(title);
 			add(new SearchPanel());
@@ -110,6 +114,7 @@ public class DicPanel extends JFrame{
 			setLayout(new FlowLayout(FlowLayout.LEFT,40,5));
 			setBackground(Color.WHITE);
 			jtfInputText.setPreferredSize(new Dimension(320, 30));
+			jtfInputText.setForeground(Color.GRAY);
 			
 			jbtSearch.setPreferredSize(new Dimension(180, 30));
 			jbtSearch.setBackground(Color.WHITE);
@@ -123,6 +128,7 @@ public class DicPanel extends JFrame{
 				public void mouseClicked(MouseEvent e){
 					if(start==false){
 						jtfInputText.setText(null);
+						jtfInputText.setForeground(Color.BLACK);
 						start=true;
 					}
 					
@@ -166,15 +172,13 @@ public class DicPanel extends JFrame{
 									outputPanel.fOPT.JBlike.setText(bdNum+"    ");
 									if(bd)outputPanel.fOPT.setVisible(true);
 									if(ydNum>=byNum){
-										if(yd)outputPanel.sOPT.setVisible(true);
-										if(by)outputPanel.tOPT.setVisible(true);
+										if(yd)outputPanel.sOPT.setVisible(true);if(by)outputPanel.tOPT.setVisible(true);
 										outputPanel.sOPT.JTFexp.setText(ydExp);outputPanel.tOPT.JTFexp.setText(byExp);
 										outputPanel.sOPT.JBlike.setText(ydNum+"    ");outputPanel.tOPT.JBlike.setText(byNum+"    ");
 										}
 									else{
-										if(by)outputPanel.sOPT.setVisible(true);
-										if(yd)outputPanel.tOPT.setVisible(true);
-										outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.fOPT.JTFexp.setText(ydExp);
+										if(by)outputPanel.sOPT.setVisible(true);if(yd)outputPanel.tOPT.setVisible(true);
+										outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.tOPT.JTFexp.setText(ydExp);
 										outputPanel.sOPT.JBlike.setText(byNum+"    ");outputPanel.tOPT.JBlike.setText(ydNum+"    ");
 										}
 								}
@@ -189,7 +193,7 @@ public class DicPanel extends JFrame{
 										}
 									else{
 										if(bd)outputPanel.sOPT.setVisible(true);if(yd)outputPanel.tOPT.setVisible(true);
-										outputPanel.sOPT.JTFexp.setText(bdExp);outputPanel.fOPT.JTFexp.setText(ydExp);
+										outputPanel.sOPT.JTFexp.setText(bdExp);outputPanel.tOPT.JTFexp.setText(ydExp);
 										outputPanel.sOPT.JBlike.setText(bdNum+"    ");outputPanel.tOPT.JBlike.setText(ydNum+"    ");
 										}
 								}
@@ -204,7 +208,7 @@ public class DicPanel extends JFrame{
 										}
 									else{
 										if(by)outputPanel.sOPT.setVisible(true);if(bd)outputPanel.tOPT.setVisible(true);
-										outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.fOPT.JTFexp.setText(bdExp);
+										outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.tOPT.JTFexp.setText(bdExp);
 										outputPanel.sOPT.JBlike.setText(byNum+"    ");outputPanel.tOPT.JBlike.setText(bdNum+"    ");
 										}
 								}
@@ -252,15 +256,13 @@ public class DicPanel extends JFrame{
 							outputPanel.fOPT.JBlike.setText(bdNum+"    ");
 							if(bd)outputPanel.fOPT.setVisible(true);
 							if(ydNum>=byNum){
-								if(yd)outputPanel.sOPT.setVisible(true);
-								if(by)outputPanel.tOPT.setVisible(true);
+								if(yd)outputPanel.sOPT.setVisible(true);if(by)outputPanel.tOPT.setVisible(true);
 								outputPanel.sOPT.JTFexp.setText(ydExp);outputPanel.tOPT.JTFexp.setText(byExp);
 								outputPanel.sOPT.JBlike.setText(ydNum+"    ");outputPanel.tOPT.JBlike.setText(byNum+"    ");
 								}
 							else{
-								if(by)outputPanel.sOPT.setVisible(true);
-								if(yd)outputPanel.tOPT.setVisible(true);
-								outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.fOPT.JTFexp.setText(ydExp);
+								if(by)outputPanel.sOPT.setVisible(true);if(yd)outputPanel.tOPT.setVisible(true);
+								outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.tOPT.JTFexp.setText(ydExp);
 								outputPanel.sOPT.JBlike.setText(byNum+"    ");outputPanel.tOPT.JBlike.setText(ydNum+"    ");
 								}
 						}
@@ -275,7 +277,7 @@ public class DicPanel extends JFrame{
 								}
 							else{
 								if(bd)outputPanel.sOPT.setVisible(true);if(yd)outputPanel.tOPT.setVisible(true);
-								outputPanel.sOPT.JTFexp.setText(bdExp);outputPanel.fOPT.JTFexp.setText(ydExp);
+								outputPanel.sOPT.JTFexp.setText(bdExp);outputPanel.tOPT.JTFexp.setText(ydExp);
 								outputPanel.sOPT.JBlike.setText(bdNum+"    ");outputPanel.tOPT.JBlike.setText(ydNum+"    ");
 								}
 						}
@@ -290,7 +292,7 @@ public class DicPanel extends JFrame{
 								}
 							else{
 								if(by)outputPanel.sOPT.setVisible(true);if(bd)outputPanel.tOPT.setVisible(true);
-								outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.fOPT.JTFexp.setText(bdExp);
+								outputPanel.sOPT.JTFexp.setText(byExp);outputPanel.tOPT.JTFexp.setText(bdExp);
 								outputPanel.sOPT.JBlike.setText(byNum+"    ");outputPanel.tOPT.JBlike.setText(bdNum+"    ");
 								}
 						}
@@ -400,5 +402,46 @@ public class DicPanel extends JFrame{
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(str);
 		return m.matches();
+	}
+
+	class ButtonPanel extends JPanel{
+		private JButton jbtExit=new JButton("Exit");
+		private JButton jbtSend=new JButton("Send Word Card");
+		public ButtonPanel(){
+			setLayout(new BorderLayout());
+			jbtExit.setVisible(true);	
+			jbtSend.setLayout(new FlowLayout(FlowLayout.CENTER,30,10));
+			setBackground(new Color(230,240,250));
+			
+			JPanel comp=new JPanel();
+			comp.add(jbtSend);
+			comp.add(jbtExit);
+			
+			comp.setBackground(new Color(221,231,253));
+			add(comp,BorderLayout.EAST);
+			jbtExit.setPreferredSize(new Dimension(100, 30));
+			jbtSend.setPreferredSize(new Dimension(180, 30));
+			
+			jbtExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					//send message to database
+					String info=5+" "+name;
+					
+					try {
+						//send exit info to server
+						toServer.writeUTF(info);
+						toServer.flush();
+						
+						//get return tips from server
+						info=fromServer.readUTF();
+						handle.setVisible(false);
+						
+						
+					} catch (IOException ex) {
+						System.err.println(ex);
+					}
+				}
+			});
+		}
 	}
 }
