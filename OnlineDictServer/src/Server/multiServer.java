@@ -26,7 +26,7 @@ public class multiServer extends JFrame{
 		
 		try{
 			//Create a server socket
-			ServerSocket serverSocket = new ServerSocket(7000);
+			ServerSocket serverSocket = new ServerSocket(8000);
 			jta.append("Server startes at "+new Date()+'\n');
 			
 			//Number a client
@@ -46,8 +46,9 @@ public class multiServer extends JFrame{
 				//Create a new task for the connection
 				HandleAClient task=new HandleAClient(socket);
 				//start the new thread
-				//task.start();
-				task.run();
+				//task.run();
+				Thread t=new Thread(task); 
+				t.start();
 				
 				//Increment clientNo
 				clientNo++;
@@ -87,6 +88,8 @@ public class multiServer extends JFrame{
 					 * log:1_name_pass
 					 * word:2_word
 					 * like:3_word_n1_n2_n3
+					 * word card
+					 * exit:5_name
 					 * etc...
 					 */
 					DB_Server se=new DB_Server();
