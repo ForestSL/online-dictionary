@@ -43,6 +43,12 @@ public class DB_Server extends DB_con{
 			DB_Like li=new DB_Like();
 			result=li.likecount(temp[1],temp[2],temp[3],temp[4]);
 		}
+		else if(temp[0].equals("5"))//ÍË³öµÇÂ¼
+		{
+			DB_Exit ex=new DB_Exit();
+			result=ex.exit(temp[1]);
+		}
+
 			
 		return result;
 			

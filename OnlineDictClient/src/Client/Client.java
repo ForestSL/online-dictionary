@@ -1,4 +1,5 @@
 package Client; 
+import java.net.InetAddress ;
 import java.io.*;
 import java.net.*;
 import java.awt.*;
@@ -17,7 +18,8 @@ public class Client{
 	public Client(){
 		try{
 			//create a socket to connect the server
-			Socket socket=new Socket("localhost",7000);
+			Socket socket=new Socket("114.212.133.81",8000);
+			
 			
 			//create an input stream to receive data from server
 			fromServer=new DataInputStream(socket.getInputStream());
@@ -29,7 +31,7 @@ public class Client{
 		}
 		
 		//Panel p to log in/register
-		Login login=new Login(fromServer,toServer);
+		LoginPanel login=new LoginPanel(fromServer,toServer);
 				
 	}
 	
