@@ -43,7 +43,7 @@ public class DB_Register  extends DB_con{
 			String username = rs.getString(1);
 			if(username.equals(name))
 			{
-				result="该用户已存在";
+				result="exist";
 				mjudge=true;
 				break;
 			}
@@ -55,10 +55,10 @@ public class DB_Register  extends DB_con{
 			sql="insert into userinfo(username,userpassword,userstate) values('"+name+"','"+password+"','"+state+"')";
 			int judge=stmt.executeUpdate(sql);
 			if(judge>0)
-				result="注册成功";
+				result="success";
 				//System.out.println("注册成功");
 			else
-				result="注册失败";
+				result="fail";
 				//System.out.println("注册失败");
 		}
 		

@@ -1,6 +1,13 @@
 
 public class Translate {
 
+	/*
+	public static void main(String[] args){
+		Translate tr=new Translate();
+		System.out.println(tr.translate("apple 1 1 1"));
+	}*/
+	
+	//返回点赞数和解释以!!!!分隔
 	public String translate(String word){
 		String result=null;
 		String[] temp=word.split(" ");
@@ -19,10 +26,15 @@ public class Translate {
 		result+=YoudaoTranslate.translateToZh(temp[0]);
 		result+="!!!!";
 		
+		//jinshan 
+		result+=JinshanTranslate.translateToZh(temp[0]);
+		result+="!!!!";
+		
 		//bing
-		result+=BingTranslate.translateToZh(temp[0]);
+		//result+=BingTranslate.translateToZh(temp[0]);
 		
 		return result;
 	}
+	
 	
 }

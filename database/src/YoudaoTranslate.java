@@ -7,8 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 
-public class YoudaoTranslate {
+public class YoudaoTranslate {//解析xml格式
 
 	private static String url = "http://fanyi.youdao.com/openapi.do"; 
 	private static String keyfrom = "sldictionary-123";
@@ -71,6 +72,7 @@ public class YoudaoTranslate {
 		// 发送GET请求翻译
 		String result = translate(str);//待分解
 		//System.out.println(result);
+		//return result;
 
 		// 处理XML中的值
 		int re1 =result.indexOf("<errorCode>");
@@ -85,12 +87,20 @@ public class YoudaoTranslate {
 			in1=in;//翻译
 			result1+=in1;
 
-			/*
+			if(!result1.equals(str))
+			{
 			re1 =result.indexOf("<ex><![CDATA[");
 			re2 =result.indexOf("]]></ex>");
-			in =result.substring(re1 + 13, re2);
-			in2=in;//网络释义
-			result1+=in2;*/
+			//if((re1+13)==null)
+			try {
+				in =result.substring(re1 + 13, re2);
+				in2=in;//网络释义
+				result1+=in2;
+			} catch (Exception e1) {
+				// TODO 自动生成的 catch 块
+				e1.printStackTrace();
+			}
+			}
 
 		} else if (in.equals("20")){
 			result1+="要翻译的文本过长";
